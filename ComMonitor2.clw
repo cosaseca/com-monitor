@@ -28,7 +28,7 @@ Type=0
 HeaderFile=ComMonitor2Dlg.h
 ImplementationFile=ComMonitor2Dlg.cpp
 Filter=D
-LastObject=IDC_MSCOMM1
+LastObject=IDC_COMBO_Port
 BaseClass=CDialog
 VirtualFilter=dWC
 

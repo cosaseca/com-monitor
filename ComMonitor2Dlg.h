@@ -19,7 +19,7 @@ class CComMonitor2Dlg : public CDialog
 // Construction
 public:
 	CComMonitor2Dlg(CWnd* pParent = NULL);	// standard constructor
-
+	void FindCommPort();
 // Dialog Data
 	//{{AFX_DATA(CComMonitor2Dlg)
 	enum { IDD = IDD_COMMONITOR2_DIALOG };
@@ -53,6 +53,7 @@ protected:
 	afx_msg void OnBtnOpen();
 	afx_msg void OnOnCommMscomm();
 	afx_msg void OnBtnSend();
+	afx_msg void OnDropdownCOMBOPort();
 	DECLARE_EVENTSINK_MAP()
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()

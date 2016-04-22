@@ -6,43 +6,28 @@
 --------------------Configuration: ComMonitor2 - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating command line "rc.exe /l 0x804 /fo"Debug/ComMonitor2.res" /d "_DEBUG" "C:\Documents and Settings\Administrator\My Documents\ComMonitor2\ComMonitor2.rc"" 
-Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP2CB.tmp" with contents
+Creating temporary file "C:\Users\tcs\AppData\Local\Temp\RSPED2A.tmp" with contents
 [
 /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Debug/" /Fp"Debug/ComMonitor2.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"C:\Documents and Settings\Administrator\My Documents\ComMonitor2\ComMonitor2.cpp"
-"C:\Documents and Settings\Administrator\My Documents\ComMonitor2\ComMonitor2Dlg.cpp"
-"C:\Documents and Settings\Administrator\My Documents\ComMonitor2\mscomm.cpp"
+"F:\tcs\ComMonitor2\ComMonitor2Dlg.cpp"
 ]
-Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP2CB.tmp" 
-Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP2CC.tmp" with contents
-[
-/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /FR"Debug/" /Fp"Debug/ComMonitor2.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"C:\Documents and Settings\Administrator\My Documents\ComMonitor2\StdAfx.cpp"
-]
-Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP2CC.tmp" 
-Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP2CD.tmp" with contents
+Creating command line "cl.exe @C:\Users\tcs\AppData\Local\Temp\RSPED2A.tmp" 
+Creating temporary file "C:\Users\tcs\AppData\Local\Temp\RSPED2B.tmp" with contents
 [
 /nologo /subsystem:windows /incremental:yes /pdb:"Debug/ComMonitor2.pdb" /debug /machine:I386 /out:"Debug/ComMonitor2.exe" /pdbtype:sept 
-".\Debug\ComMonitor2.obj"
-".\Debug\ComMonitor2Dlg.obj"
-".\Debug\mscomm.obj"
-".\Debug\StdAfx.obj"
-".\Debug\ComMonitor2.res"
+.\Debug\ComMonitor2.obj
+.\Debug\ComMonitor2Dlg.obj
+.\Debug\mscomm.obj
+.\Debug\StdAfx.obj
+.\Debug\ComMonitor2.res
 ]
-Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP2CD.tmp"
+Creating command line "link.exe @C:\Users\tcs\AppData\Local\Temp\RSPED2B.tmp"
 <h3>Output Window</h3>
-Compiling resources...
 Compiling...
-StdAfx.cpp
-Compiling...
-ComMonitor2.cpp
 ComMonitor2Dlg.cpp
-C:\Documents and Settings\Administrator\My Documents\ComMonitor2\ComMonitor2Dlg.cpp(222) : warning C4101: 'k' : unreferenced local variable
-mscomm.cpp
-Generating Code...
+F:\tcs\ComMonitor2\ComMonitor2Dlg.cpp(255) : warning C4101: 'k' : unreferenced local variable
 Linking...
-Creating command line "bscmake.exe /nologo /o"Debug/ComMonitor2.bsc"  ".\Debug\StdAfx.sbr" ".\Debug\ComMonitor2.sbr" ".\Debug\ComMonitor2Dlg.sbr" ".\Debug\mscomm.sbr""
+Creating command line "bscmake.exe /nologo /o"Debug/ComMonitor2.bsc"  .\Debug\StdAfx.sbr .\Debug\ComMonitor2.sbr .\Debug\ComMonitor2Dlg.sbr .\Debug\mscomm.sbr"
 Creating browse info file...
 <h3>Output Window</h3>
 

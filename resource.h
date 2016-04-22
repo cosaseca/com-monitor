@@ -11,6 +11,7 @@
 #define IDC_EDIT_Tx                     1000
 #define IDC_EDIT_Rx                     1001
 #define IDC_BUTTON_Open                 1002
+#define IDC_BUTTON_Scan                 1003
 #define IDC_COMBO_Port                  1005
 #define IDC_COMBO_BaudRate              1006
 #define IDC_COMBO_ByteSize              1007

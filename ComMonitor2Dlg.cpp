@@ -65,8 +65,8 @@ CComMonitor2Dlg::CComMonitor2Dlg(CWnd* pParent /*=NULL*/)
 	//{{AFX_DATA_INIT(CComMonitor2Dlg)
 	m_BaudRate = _T("9600");
 	m_ByteSize = _T("8");
-	m_Parity = _T("n");
-	m_Port = _T("1");
+	m_Parity = _T("N");
+	m_Port = _T("COM1");
 	m_Stopbits = _T("1");
 	m_RxString = _T("");
 	m_TxString = _T("");
@@ -98,6 +98,7 @@ BEGIN_MESSAGE_MAP(CComMonitor2Dlg, CDialog)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON_Open, OnBtnOpen)
 	ON_BN_CLICKED(IDC_BUTTON_Send, OnBtnSend)
+	ON_CBN_DROPDOWN(IDC_COMBO_Port, OnDropdownCOMBOPort)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -191,16 +192,48 @@ BEGIN_EVENTSINK_MAP(CComMonitor2Dlg, CDialog)
 	//}}AFX_EVENTSINK_MAP
 END_EVENTSINK_MAP()
 
+void CComMonitor2Dlg::FindCommPort()
+{
+    HKEY hKey;
+    int rtn;
+    //m_cmbComm.ResetContent();
+	CComboBox *box = (CComboBox *)GetDlgItem(IDC_COMBO_Port);
+	box->ResetContent();
+    rtn = RegOpenKeyEx(HKEY_LOCAL_MACHINE, "Hardware\\DeviceMap\\SerialComm", NULL, KEY_READ, &hKey);  //   打开串口注册表 
+    if( rtn == ERROR_SUCCESS) {
+        int   i=0;
+        char   portName[256],commName[256];
+        DWORD   dwLong,dwSize;
+        while(1) {
+            dwSize = sizeof(portName);
+            dwLong = dwSize;
+            rtn = RegEnumValue( hKey, i, portName, &dwLong, NULL, NULL, (PUCHAR)commName, &dwSize );
+            if( rtn == ERROR_NO_MORE_ITEMS )   //   枚举串口
+                break;
+            i++;
+			//TRACE(commName);TRACE("\n");
+			//m_Port.ResetContent();
+			box->AddString(commName);
+        }
+        RegCloseKey(hKey); 
+    }   
+}
+
 void CComMonitor2Dlg::OnBtnOpen() 
 {
 	// TODO: Add your control notification handler code here
 	if(m_Comm1.GetPortOpen()) {
 		m_Comm1.SetPortOpen(FALSE);
 	}
-	m_Comm1.SetCommPort(3);            //选择com1，可根据具体情况更改
+	UpdateData(TRUE);
+	short port = 0;
+	CString conf = m_BaudRate + "," + m_Parity + "," + m_ByteSize + "," + m_Stopbits;
+	sscanf(m_Port, "COM%d", &port);
+	TRACE("conf %s m_Port %s port %d\n", conf, m_Port, port);
+	m_Comm1.SetCommPort(port);            //选择com1，可根据具体情况更改
 	m_Comm1.SetInBufferSize(1024);     //设置输入缓冲区的大小，Bytes
 	m_Comm1.SetOutBufferSize(1024);    //设置输入缓冲区的大小，Bytes//
-	m_Comm1.SetSettings("9600,n,8,1"); //波特率9600，无校验，8个数据位，1个停止位
+	m_Comm1.SetSettings(conf); //波特率9600，无校验，8个数据位，1个停止位
 	m_Comm1.SetInputMode(1);           //1：表示以二进制方式检取数据
 	m_Comm1.SetRThreshold(1); 
 	//参数1表示每当串口接收缓冲区中有多于或等于1个字符时将引发一个接收数据的OnComm事件
@@ -233,6 +266,7 @@ void CComMonitor2Dlg::OnOnCommMscomm()
 		safearray_inp.AccessData((void **)&data);
 		memcpy(rxdata, data, len);
 		safearray_inp.UnaccessData();
+		GetDlgItemInt(IDC_EDIT_Rx);
 		m_RxString += CString((LPCSTR)data, len);
         //for(k=0;k<len;k++) {                 //将数组转换为Cstring型变量
         //    BYTE bt=*(char*)(rxdata+k);      //字符型
@@ -248,7 +282,13 @@ void CComMonitor2Dlg::OnOnCommMscomm()
 void CComMonitor2Dlg::OnBtnSend() 
 {
 	// TODO: Add your control notification handler code here
-	UpdateData(TRUE); //读取编辑框内容
+	// UpdateData(TRUE); //读取编辑框内容
+	GetDlgItemInt(IDC_EDIT_Tx);
 	m_Comm1.SetOutput(COleVariant(m_TxString));//发送数据
-	TRACE(m_RxString);
+}
+
+void CComMonitor2Dlg::OnDropdownCOMBOPort() 
+{
+	// TODO: Add your control notification handler code here
+	FindCommPort();
 }
